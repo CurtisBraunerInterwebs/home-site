@@ -36,3 +36,36 @@ document.addEventListener('DOMContentLoaded', function() {
       loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
     }
   });
+  const formSelect  = document.getElementById('formSelect');
+  formSelect.addEventListener(onchange, function () {
+    option = formSelect.options[formSelect.selectedIndex];
+    makeForm(option);
+    console.log(option.value + ' selected!');
+  })
+  function makeForm (type) {
+    const formToMake = document.getElementById('addNew');
+    console.log('Adding a new ' + type.value);
+    var prompt = document.createElement('p');
+            prompt.innerHTML = 'You are making a new' + type.value +'?  Tell us about it!';
+            formToMake.appendChild(prompt);
+    switch (type.id) {
+        case newClass:
+            document.getElementById("addNew-label").innerHTML = "New Class";
+            break;
+        case newChar:
+            document.getElementById("addNew-label").innerHTML = "New Character";
+            break;
+        case newSpell:
+            document.getElementById("addNew-label").innerHTML = "New Spell";
+            break;
+        case newEquip:
+            document.getElementById("addNew-label").innerHTML = "New Equipment";
+            break;
+        default:
+            document.getElementById("addNew-label").innerHTML = "Something FUCKED UP";
+            break;
+    }
+
+
+  }
+

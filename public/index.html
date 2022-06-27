@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Testing w/ Curtis</title>
 
-    <!-- update the version number as needed -->
+    <!--  update the version number as needed 
     <script defer src="/__/firebase/9.8.4/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
+     include only the Firebase features as you need 
     <script defer src="/__/firebase/9.8.4/firebase-auth-compat.js"></script>
     <script defer src="/__/firebase/9.8.4/firebase-database-compat.js"></script>
     <script defer src="/__/firebase/9.8.4/firebase-firestore-compat.js"></script>
@@ -17,25 +17,53 @@
     <script defer src="/__/firebase/9.8.4/firebase-analytics-compat.js"></script>
     <script defer src="/__/firebase/9.8.4/firebase-remote-config-compat.js"></script>
     <script defer src="/__/firebase/9.8.4/firebase-performance-compat.js"></script>
-    <!-- 
+    
       initialize the SDK after all desired features are loaded, set useEmulator to false
       to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
-    <script defer src="/public/index.js"></script>
-    <link src="/public/style.css">
+    
+    <script defer src="/__/firebase/init.js?useEmulator=false"></script> -->
     <style media="screen">
     </style>
   </head>
   <body>
     <div id="message">
-      <h1>Welcome 2 testing with Cbrack</h1>
+      <h1>Welcome 2 testing with Cbrack with .js</h1>
       <h2> I am going to be testing the options  </h2>
       <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
       <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
     </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
+    <section id="addNew">
+      <p>
+        When adding a new spell, you need:
+        <ul>
+          <li>Classes - Select</li>
+          <li>Level - Select</li>
+          <li>Effects: Text, Damage(s), Attack Roll or DC</li>
+          <li>Escalation</li>
+        </ul>
+      </p>
+      <p>
+        When adding a new class, you need:
+        <ul>
+          <li>Classes - Select</li>
+          <li>Level - Select</li>
+          <li>Effects: Text, Damage(s), Attack Roll or DC</li>
+          <li>Escalation</li>
+        </ul>
+      </p>
+      <form >
+        <select name="adding" id="formSelect">What are adding?
+          <option id="newSpell" value="spell">Spell</option>
+          <option id="newClass" value="class">Class</option>
+          <option id="newChar" value="character">Character</option>
+        </select>
+        <label id="addNew-label"></label>
+      </form>
+    </section>
 
+
+    <script defer src="/public/index.js"></script>
+    <link src="/public/style.css">
     <script>
       
     </script>
