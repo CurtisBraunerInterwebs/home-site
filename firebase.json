@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "cb-home",
     "public": "public",
     "ignore": [
       "firebase.json",
