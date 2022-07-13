@@ -1,70 +1,104 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <title>Nuclear Testing</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <!--Pure CSS-->
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.1.0/build/pure-min.css" integrity="sha384-yHIFVG6ClnONEA5yB5DJXfW2/KC173DIQrYoZMEtBvGzmf0PKiGyNEqe9N6BNDBH" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" defer src="index.js"></script>    
+    <link type="text/css"  rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/4.0.0/firebaseui.css"/>
+    <link href="src/public/.well-known/acme-challenge/dFqJrRI6iV3ryEBzDA18mCOqvNaUVxuRLNR4I__nMV8">
+    <script>
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Testing w/ Curtis</title>
-
-    <script defer src="/__/firebase/9.8.4/firebase-app-compat.js"></script>
-<!--      include only the Firebase features as you need -->
-    <script defer src="/__/firebase/9.8.4/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/9.8.4/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/9.8.4/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/9.8.4/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/9.8.4/firebase-messaging-compat.js"></script>
-    <script defer src="/__/firebase/9.8.4/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/9.8.4/firebase-analytics-compat.js"></script>
-    <script defer src="/__/firebase/9.8.4/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/9.8.4/firebase-performance-compat.js"></script>
-    
-      <!-- initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators. -->
-    
-    <script defer src="/__/firebase/init.js?useEmulator=false"></script>
-    <style media="screen">
-    </style>
   </head>
   <body>
-    <div id="message">
-      <h1>Welcome 2 testing with Cbrack with .js</h1>
-      <h2> I am going to be testing the options  </h2>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
+    <header>
+      <div id="navContainer">
+      <nav>
+        <a class="navBrand">Home</a>
+        <ul class="">
+          <li id="nav1" class="navItem" >
+            <a class="navLink">Option 1</a>
+          </li>
+          <li id="nav2" class="navItem">
+            <a class="navLink">Option 2</a>
+          </li>
+          <li id="nav3" class="navItem">
+            <a class="navLink">Option 3</a>
+          </li>
+        </ul>
+      </nav>
+      </div>
+      <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carouselInner">
+            <div class="carouselItem active" style="background-image: url('https://source.unsplash.com/RCAhiGJsUUE/1920x1080')">
+              <div class="carousel-caption">
+                <h5>First slide label</h5>
+                <p>Some representative placeholder content for the first slide.</p>
+              </div>
+            </div>
+            <div class="carousel-item" style="background-image: url('https://source.unsplash.com/wfh8dDlNFOk/1920x1080')">
+              <div class="carousel-caption">
+                <h5>Second slide label</h5>
+                <p>Some representative placeholder content for the second slide.</p>
+              </div>
+            </div>
+            <div class="carousel-item" style="background-image: url('https://source.unsplash.com/lHGeqh3XhRY/1920x1080')">
+              <div class="carousel-caption">
+                <h5>Third slide label</h5>
+                <p>Some representative placeholder content for the third slide.</p>
+              </div>
+            </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
-    <section id="addNew">
-      <p>
-        When adding a new spell, you need:
-        <ul>
-          <li>Classes - Select</li>
-          <li>Level - Select</li>
-          <li>Effects: Text, Damage(s), Attack Roll or DC</li>
-          <li>Escalation</li>
-        </ul>
-      </p>
-      <p>
-        When adding a new class, you need:
-        <ul>
-          <li>Classes - Select</li>
-          <li>Level - Select</li>
-          <li>Effects: Text, Damage(s), Attack Roll or DC</li>
-          <li>Escalation</li>
-        </ul>
-      </p>
-      <form >
-        <select name="adding" id="formSelect">What are adding?
-          <option id="newSpell" value="spell">Spell</option>
-          <option id="newClass" value="class">Class</option>
-          <option id="newChar" value="character">Character</option>
-        </select>
-        <label id="addNew-label"></label>
-      </form>
-    </section>
-
-
-    <script defer src="index.js"></script>
-    <link src="style.css">
-    <script>
-      
-    </script>
+  </header>
+  <main>
+    <div id="message"></div> 
+    <div id="testContet">
+      <section id="test1" class="testNode">
+        <h1>Realtime Database Test</h1>
+        <form id="RTDBinput">
+          <label for="RTnode">New Node</label>
+          <input type="text" id="RTnode"/>
+          <label for="RTitem">New Item</label>
+          <input type="text" id="RTitem"/>
+        </form>
+      </section>
+      <section id="test2" class="testNode">
+        <h1>Firestore Test</h1>
+        <form id="FSDBinput">
+          <label for="FScoll">New </label>
+          <input type="text" id="FScoll"/>
+          <label for="FSdoc">New Item</label>
+          <input type="text" id="FSdoc"/>
+        </form>
+      </section>
+      <section id="test3" class="testNode">
+        <h1>Storage Test</h1>
+        <form id="StorInput">
+          <label for="FScoll">New </label>
+          <input type="text" id="storFile"/>
+          <label for="FSdoc">New Item</label>
+          <input type="text" id="storeDrag"/>
+        </form>
+      </section>
+    </div>
+  </main>
   </body>
 </html>

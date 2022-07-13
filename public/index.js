@@ -1,5 +1,14 @@
 console.log("hell0 from index.js");
 
+// Import the functions you need from the SDKs you need
+import { initializeApp} from "https://www.gstatic.com/firebasejs/9.8.4/firebase-app.js";
+import { getDatabase, ref, set, get, onValue, child, update, push} from "https://www.gstatic.com/firebasejs/9.8.4/firebase-database.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from "https://www.gstatic.com/firebasejs/9.8.4/firebase-auth.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-analytics.js";
+import { getFirestore, collection, addDoc, getDocs  } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore.js"
+import { getStorage } from "firebase/storage";
+//import * as functions from "https://www.gstatic.com/firebasejs/9.8.4/firebase-functions.js";
+
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
     apiKey: "AIzaSyCc5LcHx8y2plE2bSOcDQT6scpN5DMwSdU",
@@ -13,73 +22,114 @@ const firebaseConfig = {
   };
 
 document.addEventListener('DOMContentLoaded', function() {
-    const loadEl = document.querySelector('#load');
-    // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-    // // The Firebase SDK is initialized and available here!
-    
-    //firebase.auth().onAuthStateChanged(user => { });
-    //firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-    //firebase.firestore().doc('/foo/bar').get().then(() => { });
-    //firebase.functions().httpsCallable('yourFunction')().then(() => { });
-    //firebase.messaging().requestPermission().then(() => { });
-    //firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-    //firebase.analytics(); // call to activate
-    //firebase.analytics().logEvent('tutorial_completed');
-    //firebase.performance(); // call to activate
-    
-    // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+  init();
+        
 });
-/*     try {
-      let app = firebase.app();
-      let features = [
-        'auth', 
-        'database', 
-        //'firestore',
-        //'functions',
-        //'messaging', 
-        'storage', 
-        //'analytics', 
-        'remoteConfig',
-        //'performance',
-      ].filter(feature => typeof app[feature] === 'function');
-      loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-    } catch (e) {
-      console.error(e);
-      loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
-    }
-  }); */
 
+function init () {
 
-  const formSelect  = document.getElementById('formSelect');
-  formSelect.addEventListener(onchange, function () {
-    option = formSelect.options[formSelect.selectedIndex];
-    makeForm(option);
-    console.log(option.value + ' selected!');
-  });
-  function makeForm (type) {
-    const formToMake = document.getElementById('addNew');
-    console.log('Adding a new ' + type.value);
-    var prompt = document.createElement('p');
-            prompt.innerHTML = 'You are making a new' + type.value +'?  Tell us about it!';
-            formToMake.appendChild(prompt);
-    switch (type.id) {
-        case newClass:
-            document.getElementById("addNew-label").innerHTML = "New Class";
-            break;
-        case newChar:
-            document.getElementById("addNew-label").innerHTML = "New Character";
-            break;
-        case newSpell:
-            document.getElementById("addNew-label").innerHTML = "New Spell";
-            break;
-        case newEquip:
-            document.getElementById("addNew-label").innerHTML = "New Equipment";
-            break;
-        default:
-            document.getElementById("addNew-label").innerHTML = "Something FUCKED UP";
-            break;
-    }
+  // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase(app);
+      const auth = getAuth(app);
+      const analytics = getAnalytics(app);
+      const fs = getFirestore(app);
+      const storage = getStorage(app);
+      //console.log("init started");
+      var user;
+      window.location.hash = 'welcome';
+      var contactReady = true;
 
+      const loginButton = document.getElementById("loginBtn");
 
-  }
+      loginButton.addEventListener("click", function () {
+            const userEmail = document.getElementById('email').value;
+            const userPassword = document.getElementById('password').value;
+            register(userEmail, userPassword);
+      });
 
+      function login (email, password) {
+        console.log('signing in ' + email);
+        signInWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+            // Signed in
+          user = userCredential.user;
+          console.log('signed in ' + user.email);
+          console.log(user);
+            })
+          .catch((INVALID_PASSWORD) => {
+            alert('Wrong Password, please try again');
+            document.getElementById('password').value = "";
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            console.log(errorCode);
+            const errorMessage = error.message;
+            console.log(errorMessage);
+        });
+      }
+
+      function register (email, password) {
+        if (email == "signedIn@email.com") {
+          logout();
+        } else {
+        createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          //signed in
+          user = userCredential.user;
+          console.log('new user ' + user.email);
+        })
+        .catch((EMAIL_EXISTS) => {
+          login (email, password);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          console.log(errorCode);
+          const errorMessage = error.message;
+          console.log(errorMessage);
+        });
+        if (email == "crbs1234@gmail.com") {
+          admin(true);
+        }
+       }}
+
+      function logout () {
+        console.log('signing out');
+        const email = user.email;
+        signOut(auth)
+        .then(() => {
+          // Sign-out successful.
+          console.log('signed out ' + email);
+        }).catch((error) => {
+          // An error happened.
+          const errorCode = error.code;
+          console.log(errorCode);
+          const errorMessage = error.message;
+          console.log(errorMessage);
+        });
+        admin(false);
+      }
+
+      function getFromRT(toGet) {
+        get(ref(db, toGet)).then((snapshot) => {
+          if (snapshot.exists()){
+            return snapshot.val();
+          } else { return 'File not found' ; }
+        }).catch((error) => { console.error(error); })
+      }
+
+      function setinRT(loc, toSet) {
+        onValue(ref(db, loc),((snapshot)=> {
+          if (snapshot.exists()){
+            console.log(snapshot.val());
+            set(ref(db, loc),{
+              toSet
+            });
+          } else {(console.log('Nothin\' is there'));}
+        }))
+      }
+
+      function getFromFS(toGet) {
+        var info = getDoc(doc(db, ))
+      }
+}
